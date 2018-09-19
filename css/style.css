@@ -49,12 +49,16 @@
 
 .buyBtn {
     border: 1px solid black;
-    width: 150px;
+    min-width: 150px;
     height: 50px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+}
+
+.buyBtn:hover{
+    background: lightskyblue;
 }
 
 .buyBtn p {

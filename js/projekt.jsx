@@ -14,6 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 progress: this.props.progress,
                 money: this.props.money,
                 time: this.props.time,
+                time2: this.props.time,
+                substractTime: this.props.substractTime,
                 upgrade: this.props.upgrade,
                 lvl: this.props.lvl,
                 interval: this.props.interval,
@@ -24,20 +26,21 @@ document.addEventListener('DOMContentLoaded', () => {
         handleOnClick = () => {
             if(this.state.canClick){
                 const intervalId = setInterval( () => {
+                    const inter = (300/(this.state.time2/this.state.interval));
                     this.setState({
-                        progress: this.state.progress+10,
+                        progress: this.state.progress+inter,
                         time: this.state.time-this.state.interval,
                         canClick: false,
                     })
 
-                    if(this.state.progress>=300){
-                        clearInterval(intervalId);
+                    if(this.state.progress>300){
                         this.setState({
                             progress: 0,
-                            money: this.state.money+this.state.addMoney,
-                            time: 3000,
+                            time: this.state.time2,
                             canClick: true,
-                        })
+                        });
+                        this.props.changeMoney(this.state.addMoney);
+                        clearInterval(intervalId);
                     }
                 }, this.state.interval);
 
@@ -45,18 +48,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         handleBuyClick = () => {
-            if(this.state.money >= this.state.upgrade){
-                if(this.state.interval>1){
+            if(this.state.money >= this.state.upgrade
+                && this.state.lvl <100
+                && this.state.canClick
+                && this.state.time>100
+            ){
                     this.setState({
                         lvl: this.state.lvl+1,
-                        interval: this.state.interval-5,
-                        money: this.state.money-this.state.upgrade,
-                        upgrade: this.state.upgrade*2,
+                        upgrade: this.state.upgrade*1.2,
                         addMoney:this.state.addMoney*(5/4),
+                        time: this.state.time-this.state.substractTime,
+                        time2: this.state.time2-this.state.substractTime,
                     })
-                }
+
+                    this.props.changeMoney(-this.state.upgrade);
             }
         }
+
 
         render(){
 
@@ -66,7 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             return(
                 <div>
-                    <div>Money: {Math.floor(this.state.money)}$</div>
                     <div className={"flex"}>
                         <div
                             onClick={this.handleOnClick}
@@ -83,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     onClick={this.handleBuyClick}
                                     className={"buyBtn"}>
                                     <p>Buy</p>
-                                    <p>{this.state.upgrade}$</p>
+                                    <p>{Math.floor(this.state.upgrade)}$</p>
                                 </div>
                                 <div>Time: {this.state.time}ms</div>
                             </div>
@@ -97,21 +104,57 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    class App extends React.Component {
-        render() {
+    class CreateGame extends React.Component {
+        constructor(props){
+            super(props);
+            this.state = {
+                money: 0,
+            }
+        }
+
+        handleMoneyChange = (amount) => {
+            this.setState({
+                money: this.state.money+amount,
+            });
+        }
+
+        render(){
             return (
                 <div>
+                    <div>Your money: {Math.floor(this.state.money)}$</div>
                     <NewTask
+                        changeMoney={this.handleMoneyChange.bind(this)}
                         progress={0}
-                        money={0}
+                        money={this.state.money}
                         time={3000}
+                        substractTime={50}
                         upgrade={400}
                         lvl={1}
                         interval={100}
                         addMoney={100}
                         canClick={true}
                     />
+                    <NewTask
+                        changeMoney={this.handleMoneyChange.bind(this)}
+                        progress={0}
+                        money={this.state.money}
+                        time={30000}
+                        substractTime={200}
+                        upgrade={8000}
+                        lvl={1}
+                        interval={100}
+                        addMoney={500}
+                        canClick={true}
+                    />
                 </div>
+            );
+        }
+    }
+
+    class App extends React.Component {
+        render() {
+            return (
+                <CreateGame />
             );
 
         }
