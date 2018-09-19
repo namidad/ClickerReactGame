@@ -6,19 +6,19 @@ import ReactDOM from 'react-dom';
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    class LearningCss extends React.Component {
+    class NewTask extends React.Component {
         constructor(props){
             super(props);
 
             this.state = {
-                progress: 0,
-                money: 0,
-                time: 3000,
-                upgrade: 400,
-                lvl: 1,
-                interval:100,
-                addMoney:100,
-                canClick: true,
+                progress: this.props.progress,
+                money: this.props.money,
+                time: this.props.time,
+                upgrade: this.props.upgrade,
+                lvl: this.props.lvl,
+                interval: this.props.interval,
+                addMoney: this.props.addMoney,
+                canClick: this.props.canClick,
             }
         }
         handleOnClick = () => {
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             return(
                 <div>
-                    <div>Money: {this.state.money}$</div>
+                    <div>Money: {Math.floor(this.state.money)}$</div>
                     <div className={"flex"}>
                         <div
                             onClick={this.handleOnClick}
@@ -100,7 +100,18 @@ document.addEventListener('DOMContentLoaded', () => {
     class App extends React.Component {
         render() {
             return (
-               <LearningCss/>
+                <div>
+                    <NewTask
+                        progress={0}
+                        money={0}
+                        time={3000}
+                        upgrade={400}
+                        lvl={1}
+                        interval={100}
+                        addMoney={100}
+                        canClick={true}
+                    />
+                </div>
             );
 
         }
