@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         handleBuyClick = () => {
-            if(this.state.money >= this.state.upgrade
+            if(this.props.money >= this.state.upgrade
                 && this.state.lvl <100
                 && this.state.canClick
                 && this.state.time>100
