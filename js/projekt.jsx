@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
         }
-
+ 
         render(){
             return (
                 <div className={"mainContainer"}>
