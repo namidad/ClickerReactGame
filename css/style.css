@@ -4,11 +4,31 @@
     box-sizing: border-box;
 }
 
+body {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+body:after {
+    content: "";
+    opacity: 0.6;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+    background-image: url("../assets/background.jpg");
+}
+
 .flex {
     display: flex;
     justify-content: flex-start;
     flex-direction: row;
     align-items: center;
+    border: 1px solid blue;
 }
 
 .circle {
@@ -55,6 +75,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    background: white;
 }
 
 .buyBtn:hover{
@@ -63,4 +84,36 @@
 
 .buyBtn p {
     padding: 10px;
+}
+
+.mainContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.money {
+    color: black;
+    height: 150px;
+    font-size: 80px;
+    display: flex;
+    align-items: center;
+}
+
+
+.gameContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.task {
+    padding: 40px 40px 40px 40px;
+    background: rgba(0,0,0,0.5);
+}
+
+
+.timeLeft {
+    color: white;
 }

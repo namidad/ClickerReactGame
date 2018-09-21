@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     <p>Buy</p>
                                     <p>{Math.floor(this.state.upgrade)}$</p>
                                 </div>
-                                <div>Time: {this.state.time}ms</div>
+                                <div className={"timeLeft"}>Time: {this.state.time}ms</div>
                             </div>
                         </div>
 
@@ -120,32 +120,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
         render(){
             return (
-                <div>
-                    <div>Your money: {Math.floor(this.state.money)}$</div>
-                    <NewTask
-                        changeMoney={this.handleMoneyChange.bind(this)}
-                        progress={0}
-                        money={this.state.money}
-                        time={3000}
-                        substractTime={50}
-                        upgrade={400}
-                        lvl={1}
-                        interval={100}
-                        addMoney={100}
-                        canClick={true}
-                    />
-                    <NewTask
-                        changeMoney={this.handleMoneyChange.bind(this)}
-                        progress={0}
-                        money={this.state.money}
-                        time={30000}
-                        substractTime={200}
-                        upgrade={8000}
-                        lvl={1}
-                        interval={100}
-                        addMoney={500}
-                        canClick={true}
-                    />
+                <div className={"mainContainer"}>
+                    <div className={"money"}><
+                        p>Your money: {Math.floor(this.state.money)}$</p>
+                    </div>
+                    <div className={"gameContainer"}>
+                        <div className={"task"}>
+                            <NewTask
+                                changeMoney={this.handleMoneyChange.bind(this)}
+                                progress={0}
+                                money={this.state.money}
+                                time={3000}
+                                substractTime={50}
+                                upgrade={400}
+                                lvl={1}
+                                interval={100}
+                                addMoney={100}
+                                canClick={true}
+                            />
+                        </div>
+
+                        <div className={"task"}>
+                            <NewTask
+                                changeMoney={this.handleMoneyChange.bind(this)}
+                                progress={0}
+                                money={this.state.money}
+                                time={30000}
+                                substractTime={200}
+                                upgrade={8000}
+                                lvl={1}
+                                interval={100}
+                                addMoney={500}
+                                canClick={true}
+                            />
+                        </div>
+
+
+                    </div>
+
                 </div>
             );
         }
