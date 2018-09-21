@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     onClick={this.handleBuyClick}
                                     className={"buyBtn"}>
                                     <p>Buy</p>
-                                    <p>{Math.floor(this.state.upgrade)}$</p>
+                                    <p>{Math.ceil(this.state.upgrade)}$</p>
                                 </div>
                                 <div className={"timeLeft"}>Time: {this.state.time}ms</div>
                             </div>
@@ -113,20 +113,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         handleMoneyChange = (amount) => {
-            let i=0;
-            console.log(amount);
-            const inter = setInterval(()=>{
-            if(i!==amount){
-                this.setState({
-                    money: this.state.money+1,
-                });
-                i++;
-            } else {
-                clearInterval(inter)
-            }
-
-            },15)
-
+            this.setState({
+                money: this.state.money+amount,
+            });
 
         }
 
@@ -157,12 +146,42 @@ document.addEventListener('DOMContentLoaded', () => {
                                 changeMoney={this.handleMoneyChange.bind(this)}
                                 progress={0}
                                 money={this.state.money}
+                                time={10000}
+                                substractTime={100}
+                                upgrade={3000}
+                                lvl={1}
+                                interval={100}
+                                addMoney={250}
+                                canClick={true}
+                            />
+                        </div>
+
+                        <div className={"task"}>
+                            <NewTask
+                                changeMoney={this.handleMoneyChange.bind(this)}
+                                progress={0}
+                                money={this.state.money}
                                 time={30000}
                                 substractTime={200}
                                 upgrade={8000}
                                 lvl={1}
                                 interval={100}
                                 addMoney={500}
+                                canClick={true}
+                            />
+                        </div>
+
+                        <div className={"task"}>
+                            <NewTask
+                                changeMoney={this.handleMoneyChange.bind(this)}
+                                progress={0}
+                                money={this.state.money}
+                                time={120000}
+                                substractTime={1000}
+                                upgrade={80000}
+                                lvl={1}
+                                interval={100}
+                                addMoney={50000}
                                 canClick={true}
                             />
                         </div>
