@@ -20,7 +20,7 @@ body:after {
     right: 0;
     position: absolute;
     z-index: -1;
-    background-image: url("../assets/background.jpg");
+    background-image: url("../assets/backgroundImage.jpg");
 }
 
 .flex {
@@ -28,7 +28,6 @@ body:after {
     justify-content: flex-start;
     flex-direction: row;
     align-items: center;
-    border: 1px solid blue;
 }
 
 .circle {

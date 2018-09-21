@@ -113,9 +113,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         handleMoneyChange = (amount) => {
-            this.setState({
-                money: this.state.money+amount,
-            });
+            let i=0;
+            console.log(amount);
+            const inter = setInterval(()=>{
+            if(i!==amount){
+                this.setState({
+                    money: this.state.money+1,
+                });
+                i++;
+            } else {
+                clearInterval(inter)
+            }
+
+            },15)
+
+
         }
 
         render(){
